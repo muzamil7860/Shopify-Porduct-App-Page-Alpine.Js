@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Showcase</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/alpinejs@3.14.3/dist/cdn.min.js" defer></script>
+    <script src="app.js"></script>
+</head>
+
+<body>
+    <div class="hero-section" x-data="{
+        arr_objs: [
+            { name: 'Brown', image: './assets/product.png', class: 'color-circle brown' },
+            { name: 'Gray', image: './assets/grey.jpg', class: 'color-circle gray' }
+        ],
+        selectedIndex: 0
+    }">
+        <div class="left-column">
+            <h1 class="main-heading">Start making money from your returns.</h1>
+            <p class="subheading">Built for Shopify merchants of all sizes.</p>
+
+            <div class="button-group">
+                <a href="#" class="button shopify-button">
+                    <img src="./assets/shopify.png" alt="Shopify Icon"> Install app now
+                </a>
+                <a href="#" class="button diamond-button">
+                    <img src="./assets/diamon.png" alt="Diamond Icon"> Built for Shopify
+                </a>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <div class="product-card">
+                <!-- Alpine.js bound image -->
+                <div id="productImage" style="width: 332px; height: 412px; border-radius: 8px;">
+                    <img :src="arr_objs[selectedIndex].image" alt="Product Image" style="width: 100%;" />
+                </div>
+                <div class="product-image-wrapper">
+    <div class="product-info">
+                        <h2>Sweater in <br> Everyday Cotton</h2>
+                        <p>The perfect boxy-fit sweater, The Boxy Sweater in Everyday Cotton is a layering essential.
+                            Featuring a chunky rib stitch at the crew neckline, along the hem, and sleeve cuffs, it has
+                            dropped shoulders for a relaxed edge. It’s made with 100% organic cotton, and designed to be
+                            styled solo or easily topped with a blazer or cardigan.</p>
+                        <!-- Alpine.js bound color text -->
+                        <p>Color: <span x-text="arr_objs[selectedIndex].name"></span></p>
+
+                        <!-- Color variations -->
+                        <div class="color-variations">
+                            <template x-for="(color, index) in arr_objs" :key="index">
+                                <span :class="{ 'dot-active': selectedIndex === index, [color.class]: true }"
+                                    @click="selectedIndex = index">
+                                </span>
+                            </template>
+                        </div>
+                        <button class="add-to-cart">Add to Cart | $40</button>
+                    </div>
+                </div>
+            </div>
+             <div class="floating-boxes">
+                <div class="box dollar-small"><img src="./assets/smalldollar.png" alt="Small Dollar Icon"></div>
+                <div class="box rectangle-large"><img src="./assets/largerectangle.png" alt="Rectangle Icon"></div>
+                <div class="box rectangle-small"><img src="./assets/smallrectangle.png" alt="Small Rectangle Icon">
+                </div>
+                <div class="box dollar-large"><img src="./assets/largedollor.png" alt="Large Dollar Icon"></div>
+            </div>
+        </div>
+    </div>
+</body>
